@@ -1,11 +1,12 @@
 # :unicorn: Fx [![GoDoc][doc-img]][doc] [![Github release][release-img]][release] [![Build Status][ci-img]][ci] [![Coverage Status][cov-img]][cov] [![Go Report Card][report-card-img]][report-card]
 
+go依赖注入框架：
 An application framework for Go that:
 
-* Makes dependency injection easy.
-* Eliminates the need for global state and `func init()`.
+* Makes dependency injection easy. 依赖注入使用变得容易
+* Eliminates the need for global state and `func init()`. 不需要使用全局state和func init()来完成相关的操作
 
-## Installation
+## Installation 安装说明
 
 We recommend locking to [SemVer](http://semver.org/) range `^1` using [Glide](https://github.com/Masterminds/glide):
 
@@ -13,7 +14,7 @@ We recommend locking to [SemVer](http://semver.org/) range `^1` using [Glide](ht
 glide get 'go.uber.org/fx#^1'
 ```
 
-## Stability
+## Stability 稳定性
 
 This library is `v1` and follows [SemVer](http://semver.org/) strictly.
 
