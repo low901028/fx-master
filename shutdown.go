@@ -26,6 +26,8 @@ import (
 	"syscall"
 )
 
+// 提供了手动触发application的shutdown，发送一个signal信号给所有处于open的Done-channel
+// 不过Shutdowner使用需要application是用Run方法来启动的(兼顾了Start、Done、Stop等操作)
 // Shutdowner provides a method that can manually trigger the shutdown of the
 // application by sending a signal to all open Done channels. Shutdowner works
 // on applications using Run as well as Start, Done, and Stop. The Shutdowner is
@@ -34,6 +36,8 @@ type Shutdowner interface {
 	Shutdown(...ShutdownOption) error
 }
 
+// 提供shutdowm相关处理的配置属性
+// 注意：当前没有option被实现
 // ShutdownOption provides a way to configure properties of the shutdown
 // process. Currently, no options have been implemented.
 type ShutdownOption interface {
@@ -44,6 +48,7 @@ type shutdowner struct {
 	app *App
 }
 
+// 广播一个signal给到application所有的Done channel并开始停止
 // Shutdown broadcasts a signal to all of the application's Done channels
 // and begins the Stop process.
 func (s *shutdowner) Shutdown(opts ...ShutdownOption) error {
@@ -54,6 +59,7 @@ func (app *App) shutdowner() Shutdowner {
 	return &shutdowner{app: app}
 }
 
+// 广播signal
 func (app *App) broadcastSignal(signal os.Signal) error {
 	app.donesMu.RLock()
 	defer app.donesMu.RUnlock()
